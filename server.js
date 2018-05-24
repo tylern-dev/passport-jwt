@@ -1,8 +1,11 @@
 require('dotenv').config();
 const path = require("path");
 const express = require("express");
-const bodyParser = require("body-parser");
+const passport = require('passport');
+const localStrategy = require('./authentication/passportAuth');
+const authCheck = require('./authMiddleware/jwtAuth');
 const mongoose = require('mongoose');
+const bodyParser = require("body-parser");
 const logger = require('morgan');
 const app = express();
 const PORT = process.env.PORT || 5500;
@@ -11,18 +14,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'))
 
+// passport middleware
+require('./authentication/passportAuth')
+
+
 // db connection
 require('./config/dbConnection')(mongoose);
 
 
 //route imports
-// const userRoutes = require('./api/routes/userRoutes');
+const userRoutes = require('./api/routes/userRoutes');
 // const tokenRoutes = require('./api/routes/tokenRoutes');
 const authRoutes = require('./api/routes/authRoutes');
 
+
 //routes
-// app.use('/apiUser', userRoutes);
 // app.use('/apiToken', tokenRoutes)
+app.use('/apiUser', authCheck, userRoutes);
 app.use('/authRoute', authRoutes)
 
 
