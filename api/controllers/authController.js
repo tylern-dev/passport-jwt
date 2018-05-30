@@ -81,3 +81,37 @@ exports.user_signup = (req, res, next) => {
   }
 }
 
+exports.user_changePassword = (req, res, next) =>{
+  const reqPassword = req.body.password;
+  const newPassword = req.body.newPassword;
+  const userId = req.userDecode.id;
+  User.findById(userId)
+    .exec()
+    .then( user =>{
+      bcrypt.compare(reqPassword, user.password)
+        .then((result) =>{
+          if(result){
+            bcrypt.hash(newPassword, salt)
+              .then( hash =>{
+                user.set({password: hash})
+                user.save()
+                 .then( updatedUser =>{
+                   res.status(200).json({message: 'Password updated'})
+                 })
+              })
+              .catch( err =>{
+                res.status(401).json({message: 'Password does not match'});
+              })
+          } else {
+            res.status(401).json({message: 'Password does not match'});
+          }
+        })
+        .catch( err =>{
+          res.status(401).json({message: 'Password does not match'});
+        });
+    })
+    .catch( err =>{
+      res.status(401).json({message: 'User does not exist'});
+    });
+
+}
