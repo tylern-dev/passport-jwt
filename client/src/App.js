@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import { Button } from '@material-ui/core';
+import Appbar from './components/appbar/Appbar';
 import './App.css';
-import InputField from './components/InputField';
+// import InputField from './components/InputField';
 
 class App extends React.Component {
   state = {}
@@ -14,12 +14,11 @@ class App extends React.Component {
   render() {
     return (
       <Fragment>
-        <h1>Hello world</h1>
-        <InputField for="email" label="Email" type="text" onChange={this.changeInputValue} />
-        <InputField for="password" label="Password" type="password" onChange={this.changeInputValue} />
-        <Button variant="raised" color="primary">
-          Login
-        </Button>
+        <Appbar />
+        <div>
+          <h1>Hello world</h1>
+        </div>
+
       </Fragment>
     );
   }
