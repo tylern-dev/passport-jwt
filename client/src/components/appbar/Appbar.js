@@ -1,30 +1,16 @@
-import React from 'react';
-import { Button, AppBar, Toolbar, withStyles } from '@material-ui/core';
+import React, { Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
+import Login from '../login/Login';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+const Appbar = () => (
+  <Fragment>
+    <ul>
+      <li><NavLink to="/">Logo</NavLink></li>
+      <li><NavLink to="/login">Login</NavLink></li>
+      <li><NavLink to="/signup">Sign Up</NavLink></li>
 
-  },
-  button: {
-    color: '#fff',
-  },
-};
-
-const Appbar = props => (
-  <AppBar position="static">
-    <Toolbar>
-      <Button className={props.classes.button}>Login</Button>
-    </Toolbar>
-  </AppBar>
-
+    </ul>
+  </Fragment>
 );
 
-export default withStyles(styles)(Appbar);
+export default Appbar;

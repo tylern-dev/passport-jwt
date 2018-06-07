@@ -40,13 +40,14 @@ exports.user_signup = (req, res, next) => {
   const reqPassword = req.body.password
 
   if(reqEmail === '' || reqPassword === ''){
-    res.status(400).json({message: "Email or password can not be empty."})
+    return res.status(400).json({message: "Email or password can not be empty."})
   } else{
     User.findOne({email: reqEmail})
       .exec()
       .then( user =>{
         if(user){
-          res.status(400).json({message: "Email already taken"})
+          console.log('user taken')
+          return res.status(400).json({message: "Email already taken"})
         } else{
           bcrypt.hash(reqPassword, salt)
             .then( hash =>{
@@ -114,4 +115,8 @@ exports.user_changePassword = (req, res, next) =>{
       res.status(401).json({message: 'User does not exist'});
     });
 
+}
+
+exports.validate_token = (req,res,next) =>{
+  res.status(200).json({message: 'Token OK'})
 }
