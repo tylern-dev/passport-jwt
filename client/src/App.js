@@ -48,7 +48,7 @@ class App extends React.Component {
       <Fragment>
         <Appbar />
 
-        <Main updateAuth={this.updateAuth} />
+        <Main updateAuth={this.updateAuth} isAuth={this.state.isLoggedIn} />
       </Fragment>
     );
   }

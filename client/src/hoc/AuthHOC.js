@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Authentication from '../API/authentication';
 
 
@@ -29,6 +30,7 @@ const withAuthentication = AuthComponent =>
             });
             // updates isLoggedIn in App component
             this.props.updateAuth();
+            this.props.history.push('/private');
           } else {
             this.setState({
               isLoggedIn: false,
