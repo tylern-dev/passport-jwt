@@ -46,7 +46,7 @@ class App extends React.Component {
   render() {
     return (
       <Fragment>
-        <Appbar />
+        <Appbar isLoggedIn={this.state.isLoggedIn} />
 
         <Main updateAuth={this.updateAuth} isAuth={this.state.isLoggedIn} />
       </Fragment>

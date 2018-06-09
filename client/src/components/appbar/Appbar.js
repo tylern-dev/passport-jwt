@@ -2,13 +2,22 @@ import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import Login from '../login/Login';
 
-const Appbar = () => (
+const Appbar = props => (
   <Fragment>
     <ul>
-      <li><NavLink to="/">Logo</NavLink></li>
-      <li><NavLink to="/login">Login</NavLink></li>
-      <li><NavLink to="/signup">Sign Up</NavLink></li>
-
+      {props.isLoggedIn ?
+        <Fragment>
+          <li><NavLink to="/">Logo</NavLink></li>
+          <li><NavLink to="/login">Profile</NavLink></li>
+          <li><NavLink to="/signup">Dashboard</NavLink></li>
+        </Fragment>
+    :
+        <Fragment>
+          <li><NavLink to="/">Logo</NavLink></li>
+          <li><NavLink to="/login">Login</NavLink></li>
+          <li><NavLink to="/signup">Sign Up</NavLink></li>
+        </Fragment>
+    }
     </ul>
   </Fragment>
 );
