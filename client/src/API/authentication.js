@@ -64,19 +64,19 @@ class Authentication {
         });
     });
 
-    privateRouteCheck = () => {
-      let tokenValid = true;
-      if (this.localToken) {
-        const decode = jwt_decode(this.localToken);
-        const currentTime = new Date().getTime() / 1000;
-        if (currentTime > decode.exp) {
-          tokenValid = false;
-          return tokenValid;
-        }
+  privateRouteCheck = () => {
+    let tokenValid = true;
+    if (this.localToken) {
+      const decode = jwt_decode(this.localToken);
+      const currentTime = new Date().getTime() / 1000;
+      if (currentTime > decode.exp) {
+        tokenValid = false;
         return tokenValid;
       }
-      return null;
+      return tokenValid;
     }
+    return null;
+  }
 }
 
 
