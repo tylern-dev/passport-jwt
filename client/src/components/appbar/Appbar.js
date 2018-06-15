@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import Login from '../login/Login';
-import Toggle from '../ToggleRPC';
+
 
 const Appbar = props => (
   <Fragment>
